@@ -80,10 +80,3 @@ document.getElementById("leftArrow").onclick = function(){
     var showDay = document.getElementById("day" + pos).classList;
     showDay.remove("hide");
 };
-
-
-function myFunction() {
-    document.getElementById("frm1").submit();
-};
-
-
