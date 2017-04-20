@@ -1,0 +1,89 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 100vh;
+    font-family: 'Ek Mukta', sans-serif;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    font-size: 450%;
+}
+
+#weatherBox{
+    display: flex;
+    justify-content: space-around;
+    font-size: 200%;
+    align-items: center;
+
+}
+
+.day {
+    border: solid;
+    padding-left: 3%;
+    padding-right: 3%;
+    min-height: 220px;
+    min-width: 200px;
+}
+
+.day .dayForecast{
+    margin-bottom: 0;
+}
+
+.day p{
+    margin-top: 1%;
+}
+
+#rightArrow button, #leftArrow button{
+    font-size: 250%;
+    border-style: none;
+    background-color: transparent;
+}
+
+
+
+#location{
+    display: flex;
+    justify-content: center;
+    font-size: 250%;
+    align-items: center;
+    margin-top: 5%;
+}
+
+footer form input{
+    width: 100%;
+    height: 10%;
+    border-style: solid;
+}
+
+.hide{
+    display: none;
+}
+
+
+@media only screen
+and (max-device-width: 1024px)
+and (max-device-height: 1366px),
+(max-width: 480px){
+    #weatherBox{
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .day{
+        display: flex;
+        flex-direction: column;
+        min-height: 175px;
+        min-width: 225px;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .arrow{
+        display: none;
+    }
+
+}

@@ -1,0 +1,116 @@
+<!--
+Beginning of Weather App
+
+Also requires files:
+	weather.css
+	weather.js
+-->
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Weather App</title>
+    <!-- <link rel="stylesheet" type="text/css" href="reset.css"> -->
+    <link rel="stylesheet" type="text/css" href="weather.css">
+    <link href="https://fonts.googleapis.com/css?family=Ek+Mukta" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+
+        <p id="currentLocation"></p>
+
+    </header>
+
+    <div id="weatherBox">
+
+        <div id="leftArrow" class="arrow hide">
+            <button><i class="icon-arrow-left"></i></button>
+        </div>
+
+        <div class="day" id="day1">
+            <p id="date1"></p>
+            <p id="weather1" class="dayForecast"></p>
+            <p id="temp1"></p>
+        </div>
+
+        <div class="day" id="day2">
+            <p id="date2"></p>
+            <p id="weather2" class="dayForecast"></p>
+            <p id="temp2"></p>
+        </div>
+
+        <div class="day" id="day3">
+            <p id="date3"></p>
+            <p id="weather3" class="dayForecast"></p>
+            <p id="temp3"></p>
+
+        </div>
+
+        <div class="day" id="day4">
+            <p id="date4"></p>
+            <p id="weather4" class="dayForecast"></p>
+            <p id="temp4"></p>
+        </div>
+
+        <div class="day" id="day5">
+            <p id="date5"></p>
+            <p id="weather5" class="dayForecast"></p>
+            <p id="temp5"></p>
+        </div>
+
+        <div class="day hide" id="day6">
+            <p id="date6"></p>
+            <p id="weather6" class="dayForecast"></p>
+            <p id="temp6"></p>
+        </div>
+
+        <div class="day hide" id="day7">
+            <p id="date7"></p>
+            <p id="weather7" class="dayForecast"></p>
+            <p id="temp7"></p>
+        </div>
+
+        <div class="day hide" id="day8">
+            <p id="date8"></p>
+            <p id="weather8" class="dayForecast"></p>
+            <p id="temp8"></p>
+        </div>
+
+        <div class="day hide" id="day9">
+            <p id="date9"></p>
+            <p id="weather9" class="dayForecast"></p>
+            <p id="temp9"></p>
+        </div>
+
+        <div class="day hide" id="day10">
+            <p id="date10"></p>
+            <p id="weather10" class="dayForecast"></p>
+            <p id="temp10"></p>
+        </div>
+
+        <div id="rightArrow" class="arrow">
+            <button><i class="icon-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <footer id="location">
+
+        <form id="userInput">
+            <input type="text" name="location"><br>
+            Zip code or place
+        </form>
+
+    </footer>
+
+<!-- contains callback function that is called when weather gets here from server -->
+<script src="weather.js"></script>
+
+<!-- asks server to send weather -->
+<script src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='davis, ca')&format=json&callback=callbackFunction"></script>
+
+</body>
+</html>
