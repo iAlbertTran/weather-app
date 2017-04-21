@@ -8,10 +8,10 @@
         <!-- <link rel="stylesheet" type="text/css" href="reset.css"> -->
         <link rel="stylesheet" type="text/css" href="weather.css">
         <link href="https://fonts.googleapis.com/css?family=Ek+Mukta" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
 
-    <body onload="init()">
+    <body>
 
     <header>
 
@@ -22,7 +22,7 @@
     <main>
 
         <div id="leftArrow" class="arrow hide">
-            <button><i class="icon-arrow-left"></i></button>
+            <button><i class="fa fa-arrow-left"></i></button>
         </div>
 
         <div id="weatherBox">
@@ -93,7 +93,7 @@
 
         <div id="rightArrow" class="arrow">
 
-            <button><i class="icon-arrow-right"></i></button>
+            <button><i class="fa fa-arrow-right"></i></button>
 
         </div>
 
@@ -122,6 +122,6 @@
     <!-- asks server to send weather -->
     <script src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='davis, ca')&amp;format=json&amp;callback=callbackFunction"></script>
 
-</body>
+    </body>
 
 </html>
