@@ -9,14 +9,18 @@ var leftOverSpace;
 
 // startPos designates which day is the left most displayed box
 // endPos designates which day is the right most displayed box
-var startPos = 1;
-var endPos = 5;
+var startPos;
+var endPos;
 
 
 
 // Executed on load to get the positioning of the weather boxes equal
 
 window.onload = window.onresize = function setUp() {
+    startPos = 1;
+    endPos = 5;
+    document.getElementById("leftArrow").classList.add("hide");
+    document.getElementById("rightArrow").classList.remove("hide");
     if(window.innerWidth <= 480){
         mobileSetup();
     }
