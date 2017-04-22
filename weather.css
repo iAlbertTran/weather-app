@@ -3,32 +3,85 @@ body{
     flex-direction: column;
     justify-content: space-around;
     font-family: 'Ek Mukta', sans-serif;
-    min-height: 100%;
+    background: linear-gradient(#3AAFDF, #161F62);
+    min-height: 100vh;
+    margin: 0;
+    color: white;
+    line-height: 1.5;
 }
 
 header{
     display: flex;
-    justify-content: center;
-    font-size: 450%;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5%;
 }
+
+header #currTime{
+}
+
+header #todaysDate{
+}
+header #searchForm{
+    text-align: right;
+}
+
+#searchForm #userInput{
+    background: #C2DFE8;
+    border-style: none;
+    border-radius: 15px;
+    padding-left: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    max-width: 65%;
+}
+
+header p{
+    margin: 0;
+}
+
+
+#todayInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+#todayInfo div{
+    flex: 1;
+}
+
+#todayInfo p{
+    margin: 0;
+}
+
+#today{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header #submitButton{
+    background: #39C2EC;
+    border-style: none;
+    color: white;
+    border-radius: 10px;
+}
+
 
 main{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-main .arrow button{
-    font-size: 300%;
-    border-style: none;
-    background-color: transparent;
+    flex: 1;
 }
 
 #weatherBox{
     display: flex;
-    font-size: 150%;
     overflow: hidden;
     flex-basis: 100%;
+    width: 90vw;
 }
 
 
@@ -36,56 +89,82 @@ main .arrow button{
     flex-grow: 0;
     flex-shrink: 0;
     flex-basis: 12.5%;
-    border: 2px solid;
     position: relative;
     transition-property: left;
     transition-duration: 1s;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 1%;
-}
-
-.day .dayForecast{
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: #3C85B0;
+    border-radius: 10px;
 }
 
 .day p{
-    margin-top: 1%;
-    line-height: 30px;
+    margin: 0;
 }
 
 .day .temp{
-    margin-bottom: 35%;
-}
-
-
-#location{
     display: flex;
-    justify-content: center;
-    font-size: 200%;
-    align-items: center;
-    margin-top: 5%;
-    text-align: center;
+    justify-content: space-around;
+    width: 100%;
 }
 
-#location form input{
-    width: 100%;
-    height: 10%;
-    border-style: solid;
-    font-size: 75%;
+#arrows{
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
 }
+
+.arrow{
+    display: flex;
+    width: 50%;
+    align-items: center;
+}
+
+
+#arrows .arrow button, #arrowButtonDown, #arrowButtonUp{
+    border-style: none;
+    background-color: transparent;
+    outline: none;
+    color: #508CBE;
+}
+
+
+#leftArrow{  justify-content: flex-start;  }
+#leftArrow p{
+    margin-left: 1%;
+}
+
+
+#rightArrow{  justify-content: flex-end;  }
+#rightArrow p{
+    margin-right: 1%;
+}
+
+
 
 .hide{
     visibility: hidden;
 }
 
 footer{
-    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100vw;
+    background: black;
+}
+
+footer img{
     max-width: 135px;
     max-height: 30px;
     min-width: 100px;
     min-height: 25px;
-    width: 100%;
+}
+
+#arrowButtonUp, #arrowButtonDown{
+    display: none;
 }
 
 @media only screen
@@ -103,18 +182,41 @@ and (max-device-height: 1366px),
         flex-direction: column;
         min-height: 175px;
         min-width: 200px;
-        margin-top: 1%;
-        margin-bottom: 1%;
-        padding-top: 5%;
-        padding-left: 5%;
-        padding-right: 0;
         left: 0;
-        transition-property: none;
-        position: static;
+        transition-property: top;
     }
 
-    .arrow{
+    .arrow, #todaysWeather, #humidityAndWind, #todaysTemp, #todaysForecast, #todaysDate, #submitButton, #humidity, #wind{
         display: none;
     }
 
+    #todayInfo{
+        flex: 0;
+    }
+
+    #today{
+        align-items: flex-start;
+        margin: 0 8px 8px 8px;
+    }
+
+    header{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        margin: 8px 8px 0 8px;
+    }
+
+    header #searchForm{
+        text-align: left;
+    }
+    footer{
+        background: transparent;
+    }
+    footer img{
+        display: none;
+
+    }
+
+    #arrowButtonDown, #arrowButtonUp{
+        justify-content: center;
+    }
 }
