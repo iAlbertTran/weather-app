@@ -7,7 +7,8 @@
         <title>Weather App</title>
         <!-- <link rel="stylesheet" type="text/css" href="reset.css"> -->
         <link rel="stylesheet" type="text/css" href="weather.css">
-        <link href="https://fonts.googleapis.com/css?family=Ek+Mukta" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Assistant" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Mukta+Vaani" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
 
@@ -23,7 +24,7 @@
         <div id="searchForm">
             <input id="userInput" type="text" placeholder="enter zip" required><br>
             <button id="submitButton" onclick="gotNewPlace()">submit</button>
-            <!--<img src="/Assets/plus-01.png">-->
+            <img id="submitButtonMobile" onclick="gotNewPlace()" src="Assets/plus-01.png"/>
         </div>
 
     </header>
@@ -34,13 +35,24 @@
 
         <div id="today">
             <p id="currentLocation"></p>
-            <p id="todaysTemp"></p>
+            <div id="tempWithF">
+                <p id="todaysTemp"></p>
+                <p id="fahren">F</p>
+            </div>
             <p id="todaysForecast"></p>
         </div>
 
         <div id="humidityAndWind">
-            <p id="humidity"></p>
-            <p id="wind"></p>
+            <div id="humidWindIcons">
+                <img src="Assets/drop-01.png" id="humidityIcon"/>
+                <img src="Assets/wind-01.png" id="windIcon"/>
+            </div>
+
+            <div id="humidWindText">
+                <p id="humidity"></p>
+                <p id="wind"></p>
+            </div>
+
         </div>
     </div>
 
@@ -49,103 +61,103 @@
         <div id="weatherBox">
 
             <div class="day" id="day1">
-                <p id="date1"></p>
-                <p id="icon1"></p>
+                <p id="date1" class="weekDay"></p>
+                <p id="icon1" class="icon"></p>
                 <p id="weather1" class="dayForecast"></p>
                 <div id="temp1" class="temp">
-                    <p id="high1"></p>
-                    <p id="low1"></p>
+                    <p id="high1" class="high"></p>
+                    <p id="low1" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day2">
-                <p id="date2"></p>
-                <p id="icon2"></p>
+                <p id="date2" class="weekDay"></p>
+                <p id="icon2" class="icon"></p>
                 <p id="weather2" class="dayForecast"></p>
                 <div id="temp2" class="temp">
-                    <p id="high2"></p>
-                    <p id="low2"></p>
+                    <p id="high2" class="high"></p>
+                    <p id="low2" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day3">
-                <p id="date3"></p>
-                <p id="icon3"></p>
+                <p id="date3" class="weekDay"></p>
+                <p id="icon3" class="icon"></p>
                 <p id="weather3" class="dayForecast"></p>
                 <div id="temp3" class="temp">
-                    <p id="high3"></p>
-                    <p id="low3"></p>
+                    <p id="high3" class="high"></p>
+                    <p id="low3" class="low"></p>
                 </div>
 
             </div>
 
             <div class="day" id="day4">
-                <p id="date4"></p>
-                <p id="icon4"></p>
+                <p id="date4" class="weekDay"></p>
+                <p id="icon4" class="icon"></p>
                 <p id="weather4" class="dayForecast"></p>
                 <div id="temp4" class="temp">
-                    <p id="high4"></p>
-                    <p id="low4"></p>
+                    <p id="high4" class="high"></p>
+                    <p id="low4" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day5">
-                <p id="date5"></p>
-                <p id="icon5"></p>
+                <p id="date5" class="weekDay"></p>
+                <p id="icon5" class="icon"></p>
                 <p id="weather5" class="dayForecast"></p>
                 <div id="temp5" class="temp">
-                    <p id="high5"></p>
-                    <p id="low5"></p>
+                    <p id="high5" class="high"></p>
+                    <p id="low5" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day6">
-                <p id="date6"></p>
-                <p id="icon6"></p>
+                <p id="date6" class="weekDay"></p>
+                <p id="icon6" class="icon"></p>
                 <p id="weather6" class="dayForecast"></p>
                 <div id="temp6" class="temp">
-                    <p id="high6"></p>
-                    <p id="low6"></p>
+                    <p id="high6" class="high"></p>
+                    <p id="low6" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day7">
-                <p id="date7"></p>
-                <p id="icon7"></p>
+                <p id="date7" class="weekDay"></p>
+                <p id="icon7" class="icon"></p>
                 <p id="weather7" class="dayForecast"></p>
                 <div id="temp7" class="temp">
-                    <p id="high7"></p>
-                    <p id="low7"></p>
+                    <p id="high7" class="high"></p>
+                    <p id="low7" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day8">
-                <p id="date8"></p>
-                <p id="icon8"></p>
+                <p id="date8" class="weekDay"></p>
+                <p id="icon8" class="icon"></p>
                 <p id="weather8" class="dayForecast"></p>
                 <div id="temp8" class="temp">
-                    <p id="high8"></p>
-                    <p id="low8"></p>
+                    <p id="high8" class="high"></p>
+                    <p id="low8" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day9">
-                <p id="date9"></p>
-                <p id="icon9"></p>
+                <p id="date9" class="weekDay"></p>
+                <p id="icon9" class="icon"></p>
                 <p id="weather9" class="dayForecast"></p>
                 <div id="temp9" class="temp">
-                    <p id="high9"></p>
-                    <p id="low9"></p>
+                    <p id="high9" class="high"></p>
+                    <p id="low9" class="low"></p>
                 </div>
             </div>
 
             <div class="day" id="day10">
-                <p id="date10"></p>
-                <p id="icon10"></p>
+                <p id="date10" class="weekDay"></p>
+                <p id="icon10" class="icon"></p>
                 <p id="weather10" class="dayForecast"></p>
                 <div id="temp10" class="temp">
-                    <p id="high10"></p>
-                    <p id="low10"></p>
+                    <p id="high10" class="high"></p>
+                    <p id="low10" class="low"></p>
                 </div>
             </div>
 
@@ -170,7 +182,7 @@
 
     </main>
 
-    <footer>
+    <footer id="footer">
         <img alt="yahoo Icon" src="Assets/purple.png"/>
         <button id="arrowButtonDown"><i class="fa fa-chevron-circle-down"></i></button>
         <button id="arrowButtonUp"><i class="fa fa-chevron-circle-up"></i></button>
