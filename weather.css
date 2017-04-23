@@ -46,6 +46,8 @@ header p{
     justify-content: center;
     align-items: center;
     flex: 1;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 #todayInfo div{
     flex: 1;
@@ -59,6 +61,11 @@ header p{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#todaysWeather{
+    display: flex;
+    justify-content: center;
 }
 
 header #submitButton{
@@ -192,17 +199,17 @@ and (max-device-height: 1366px),
 
     #todayInfo{
         flex: 0;
+        margin: 0 1% 1% 1%;
     }
 
     #today{
         align-items: flex-start;
-        margin: 0 8px 8px 8px;
     }
 
     header{
         flex-direction: column-reverse;
         align-items: flex-start;
-        margin: 8px 8px 0 8px;
+        margin: 1% 1% 0 1%;
     }
 
     header #searchForm{
@@ -219,4 +226,5 @@ and (max-device-height: 1366px),
     #arrowButtonDown, #arrowButtonUp{
         justify-content: center;
     }
+
 }
