@@ -5,13 +5,19 @@ var dayBox;
 var dayBoxWidth;
 var totalDayBoxWidth;
 var leftOverSpace;
+var weatherCodes = [
+    [23, 31, 32, 33, 34, 36],
+    [29, 30],
+    [26, 27, 28],
+    [8, 9, 11, 12, 35, 40, 45, 47]];
 
+var weatherPerCode = ["sun-01.png", "part-sun-01.png", "cloud-01.png", "rain-01.png"];
 
 // startPos designates which day is the left most displayed box
 // endPos designates which day is the right most displayed box
 var startPos;
 var endPos;
-
+var mobilePos = 1;
 
 
 // Executed on load to get the positioning of the weather boxes equal
@@ -19,43 +25,54 @@ var endPos;
 window.onload = window.onresize = function setUp() {
     startPos = 1;
     endPos = 5;
-    document.getElementById("leftArrow").classList.add("hide");
-    document.getElementById("rightArrow").classList.remove("hide");
+    mobilePos = 1;
+
     if(window.innerWidth <= 480){
         mobileSetup();
+        document.getElementById("arrowButtonUp").style.display = "none";
+        document.getElementById("arrowButtonDown").style.display = "flex";
     }
+
     // gets the weatherBox div, and finds its width. Uses getBoundingClientRect because offsetWidth and clientWidth
     // both round to the nearest integer
-    else {
-        weatherBox = document.getElementById("weatherBox");
-        weatherBoxWidth = weatherBox.getBoundingClientRect().width;
-
-
-        // gets the width of a day1 div, since the width is identical for all 10 of them.
-        // also finds and adds the paddingLeft size (in px) to dayBoxWidth to get total width of the box
-        // paddingLeft multiplied by 2 because paddingRight is same amount.
-        dayBox = document.getElementById("day1");
-        dayBoxWidth = dayBox.getBoundingClientRect().width;
-
-
-        // gets the total width of 5 day divs and determines the left over space in the weather box to be distributed
-        // evenly between each displayed div. There are a total of 4 gaps between the divs.
-        totalDayBoxWidth = dayBoxWidth * 5;
-        leftOverSpace = weatherBoxWidth - totalDayBoxWidth;
-        leftOverSpace = leftOverSpace / 4;
-
-
-        var pos = 0;
-        // for loop to set the left property of each of the first 5 days.
-        // Starts at left: 0 and then increments by leftOverSpace
-        for (var i = 0; i < 10; i++) {
-            var dayByNum = document.getElementById("day" + (i + 1));
-            dayByNum.style.left = pos + "px";
-            pos = pos + leftOverSpace;
-        }
+    else{
+        document.getElementById("leftArrow").classList.add("hide");
+        document.getElementById("rightArrow").classList.remove("hide");
+        document.getElementById("arrowButtonUp").style.display = "none";
+        document.getElementById("arrowButtonDown").style.display = "none";
+        desktopSetup();
     }
 }
 
+function desktopSetup(){
+    weatherBox = document.getElementById("weatherBox");
+    weatherBoxWidth = weatherBox.getBoundingClientRect().width;
+
+
+    // gets the width of a day1 div, since the width is identical for all 10 of them.
+    // also finds and adds the paddingLeft size (in px) to dayBoxWidth to get total width of the box
+    // paddingLeft multiplied by 2 because paddingRight is same amount.
+    dayBox = document.getElementById("day1");
+    dayBoxWidth = dayBox.getBoundingClientRect().width;
+
+
+    // gets the total width of 5 day divs and determines the left over space in the weather box to be distributed
+    // evenly between each displayed div. There are a total of 4 gaps between the divs.
+    totalDayBoxWidth = dayBoxWidth * 5;
+    leftOverSpace = weatherBoxWidth - totalDayBoxWidth;
+    leftOverSpace = leftOverSpace / 4;
+
+
+    var pos = 0;
+    // for loop to set the left property of each of the first 5 days.
+    // Starts at left: 0 and then increments by leftOverSpace
+    for (var i = 0; i < 10; i++) {
+        var dayByNum = document.getElementById("day" + (i + 1));
+        dayByNum.style.left = pos + "px";
+        dayByNum.style.top = 0;
+        pos = pos + leftOverSpace;
+    }
+}
 var mobileWeatherBox;
 var mobileWeatherBoxHeight;
 var mobileDayBox;
@@ -65,7 +82,6 @@ var mobileLeftOverSpace;
 function mobileSetup(){
     mobileWeatherBox = document.getElementById("weatherBox");
     mobileWeatherBoxHeight = mobileWeatherBox.getBoundingClientRect().height;
-
     mobileDayBox = document.getElementById("day1");
     mobileDayBoxHeight = mobileDayBox.getBoundingClientRect().height;
     mobileLeftOverSpace = mobileWeatherBoxHeight - mobileDayBoxHeight;
@@ -145,7 +161,6 @@ document.getElementById("arrowButtonLeft").onclick = function(){
     }
 };
 
-var mobilePos = 1;
 document.getElementById("arrowButtonDown").onclick = function(){
 
     //increments to keep track of which day is being displayed
@@ -198,6 +213,22 @@ function callbackFunction(data) {
     setUpToday(data);
     setUpWeatherBox(data);
 
+    if(window.innerWidth <= 480){
+        mobileSetup();
+        document.getElementById("arrowButtonUp").style.display = "none";
+        document.getElementById("arrowButtonDown").style.display = "flex";
+    }
+
+    // gets the weatherBox div, and finds its width. Uses getBoundingClientRect because offsetWidth and clientWidth
+    // both round to the nearest integer
+    else{
+        document.getElementById("leftArrow").classList.add("hide");
+        document.getElementById("rightArrow").classList.remove("hide");
+        document.getElementById("arrowButtonUp").style.display = "none";
+        document.getElementById("arrowButtonDown").style.display = "none";
+        desktopSetup();
+    }
+
 }
 
 function setUpToday(data){
@@ -223,32 +254,45 @@ function setUpToday(data){
 
     document.getElementById("todaysDate").textContent = month + " " + date[0] + ", " + date[2];
 
-
+    var location = data.query.results.channel.location;
+    var curr = document.getElementById("currentLocation");
+    curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
 
     var forecast = data.query.results.channel.item.forecast;
     document.getElementById("todaysTemp").textContent = forecast[0].high;
     document.getElementById("todaysForecast").textContent = forecast[0].text;
+    document.getElementById("wind").textContent = data.query.results.channel.wind.speed + "mph";
+    document.getElementById("humidity").textContent = data.query.results.channel.atmosphere.humidity + "%";
 
-    document.getElementById("wind").textContent = data.query.results.channel.wind.speed;
-    document.getElementById("humidity").textContent = data.query.results.channel.atmosphere.humidity;
+    var code = forecast[0].code;
+    for(var a = 0; a < 4; ++a){
+        for(var b = 0; b < weatherCodes[a].length ; ++b){
+            if (code == weatherCodes[a][b])
+                var correspondingWeather = a;
+        }
+    }
+    var todayIcon = document.getElementById("todaysWeather");
 
-    var img = document.createElement('img');
-    img.src = "Assets/part-sun-01.png";
-    document.getElementById("todaysWeather").appendChild(img);
+    if(todayIcon.childElementCount > 0){
+        var todaysImg = document.getElementById("todaysImg");
+        todaysImg.src = "Assets/" + weatherPerCode[correspondingWeather];
+    }
+    else {
+        var img = document.createElement('img');
+        img.src = "Assets/" + weatherPerCode[correspondingWeather];
+        img.id = "todaysImg";
+        document.getElementById("todaysWeather").appendChild(img);
+    }
 }
 
 
 function setUpWeatherBox(data){
     // Month array used to get the full name from an abbreviation
-
     // Extracts the forecast information needed from data
     var forecast = data.query.results.channel.item.forecast;
 
 
     // Finds what the location the weather is for, then places it in the header
-    var location = data.query.results.channel.location;
-    var curr = document.getElementById("currentLocation");
-    curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
 
     //loops through to fill in the HTML based on the day
     for (var i = 1; i < 11; ++i) {
@@ -264,10 +308,28 @@ function setUpWeatherBox(data){
         high.textContent = forecast[i - 1].high;
         low.textContent = forecast[i - 1].low;
 
-        var img = document.createElement('img');
-        img.src = "Assets/part-sun-01.png";
-        img.id = "img" + i;
-        document.getElementById("icon" + i).appendChild(img);
+
+        var code = forecast[i-1].code;
+
+        for(var a = 0; a < 4; ++a){
+            for(var b = 0; b < weatherCodes[a].length ; ++b){
+                if (code == weatherCodes[a][b])
+                    var correspondingWeather = a;
+            }
+        }
+
+        var dayIcon = document.getElementById("icon" + i);
+
+        if(dayIcon.childElementCount > 0){
+            var iconImg = document.getElementById("img" + i)
+            iconImg.src = "Assets/" + weatherPerCode[correspondingWeather];
+        }
+        else {
+            var img = document.createElement('img');
+            img.src = "Assets/" + weatherPerCode[correspondingWeather];
+            img.id = "img" + i;
+            document.getElementById("icon" + i).appendChild(img);
+        }
     }
 }
 
@@ -281,10 +343,10 @@ function gotNewPlace() {
 
     // start making the complicated URL
     script.src = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+newPlace+"')&format=json&callback=callbackFunction"
-    script.id = "jsonpCall";
+    script.id = "APILink";
 
     // remove old script
-    var oldScript = document.getElementById("jsonpCall");
+    var oldScript = document.getElementById("APIlink");
     if (oldScript != null) {
         document.body.removeChild(oldScript);
     }
