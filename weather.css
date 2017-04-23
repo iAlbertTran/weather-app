@@ -1,30 +1,32 @@
+
 body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-family: 'Ek Mukta', sans-serif;
+    font-family: "Assistant", "Mukta Vaani", sans-serif;
     background: linear-gradient(#3AAFDF, #161F62);
     min-height: 100vh;
     margin: 0;
     color: white;
-    line-height: 1.5;
 }
+
 
 header{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 5%;
+    margin-top: 2.5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
-header #currTime{
+header #currTime{ font-size: 3vw;
+    min-width: 300px;
 }
 
-header #todaysDate{
-}
-header #searchForm{
-    text-align: right;
-}
+header #todaysDate{ font-size: 2vw; }
+
+header #searchForm{  text-align: right;  }
 
 #searchForm #userInput{
     background: #C2DFE8;
@@ -33,7 +35,9 @@ header #searchForm{
     padding-left: 5%;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
+    padding-right: 10%;
     max-width: 65%;
+    font-size: 1.25vw;
 }
 
 header p{
@@ -43,14 +47,12 @@ header p{
 
 #todayInfo{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex: 1;
+    flex: 1 0;
     margin-left: 10%;
     margin-right: 10%;
-}
-#todayInfo div{
-    flex: 1;
+    padding-bottom: 2%;
 }
 
 #todayInfo p{
@@ -61,19 +63,80 @@ header p{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-#todaysWeather{
-    display: flex;
     justify-content: center;
 }
 
+#todayInfo div{
+    flex-grow: 1;
+}
+
+#today #currentLocation{ font-size: 3.25vw;  }
+
+#today #tempWithF{
+    display: flex;
+}
+
+#today #tempWithF #fahren{
+    padding-top: 10%;
+    font-size: 2vw;
+}
+
+#today #todaysTemp{
+    font-size: 9vw;
+    background: url("Assets/degree-01.png") no-repeat right 20%;
+    background-size: 15%;
+    padding-right: 10%;
+    padding-left: 10%;
+    line-height: 1;
+}
+
+#today #todaysForecast{ font-size: 1.5vw; }
+
+#todaysWeather{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+#todaysWeather img{
+    width: 12.5vw;
+    height: auto;
+}
 header #submitButton{
     background: #39C2EC;
     border-style: none;
     color: white;
     border-radius: 10px;
+    font-size: 1vw;
 }
+
+#humidityAndWind{
+    display: flex;
+    justify-content: flex-start;
+}
+
+#humidWindIcons, #humidWindText{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 2vw;
+}
+
+#humidWindIcons{
+    align-items: flex-end;
+}
+
+#humidWindIcons img{
+    width: 2vw;
+    height: auto;
+}
+#humidWindText{
+    padding-left: 5%;
+}
+
 
 
 main{
@@ -81,7 +144,7 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 1 1;
 }
 
 #weatherBox{
@@ -93,30 +156,54 @@ main{
 
 
 .day {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 12.5%;
-    position: relative;
     transition-property: left;
     transition-duration: 1s;
     display: flex;
+    flex: 1 0 19%;
+    width: 15%;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     background: #3C85B0;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
-.day p{
-    margin: 0;
+.day p{  margin: 0;  }
+
+.day .weekDay{  font-size: 2vw;  }
+
+.day .dayForecast{  font-size: 1.5vw;  }
+
+.day .icon img{
+    width: 10vw;
+    height: auto;
 }
 
 .day .temp{
     display: flex;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: space-between;
+    font-size: 3vw;
+    line-height: 1;
+    width: 75%;
+
 }
 
+.day .temp p{
+    background: url("Assets/degree-01.png") no-repeat 90% 15%;
+    background-size: 15%;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 10%;
+}
+
+.day .high{
+    font-weight: 900;
+}
+
+.day .low{
+    font-weight: 100;
+}
 #arrows{
     display: flex;
     justify-content: space-between;
@@ -127,6 +214,7 @@ main{
     display: flex;
     width: 50%;
     align-items: center;
+    font-size: 1.5vw;
 }
 
 
@@ -135,6 +223,7 @@ main{
     background-color: transparent;
     outline: none;
     color: #508CBE;
+    font-size: 1.5vw;
 }
 
 
@@ -170,7 +259,7 @@ footer img{
     min-height: 25px;
 }
 
-#arrowButtonUp, #arrowButtonDown{
+#arrowButtonUp, #arrowButtonDown, #submitButtonMobile{
     display: none;
 }
 
@@ -178,17 +267,22 @@ footer img{
 and (max-device-width: 1024px)
 and (max-device-height: 1366px),
 (max-width: 480px){
+    html, body{
+        height: 100%;
+        width: 100%;
+    }
+
     #weatherBox{
         flex-direction: column;
         align-items: center;
-        flex: 1 1 0;
+        flex: 1;
     }
 
     .day{
         display: flex;
         flex-direction: column;
-        min-height: 175px;
-        min-width: 200px;
+        flex-basis: 75vw;
+        width: 65%;
         left: 0;
         transition-property: top;
     }
@@ -199,21 +293,56 @@ and (max-device-height: 1366px),
 
     #todayInfo{
         flex: 0;
-        margin: 0 1% 1% 1%;
+        margin: 0 2.5% 5% 5%;
     }
 
     #today{
         align-items: flex-start;
     }
 
+    #today #tempWithF #fahren{
+        displaY: none;
+    }
+
     header{
         flex-direction: column-reverse;
         align-items: flex-start;
-        margin: 1% 1% 0 1%;
+        margin: 2.5% 2.5% 5% 5%;
     }
 
+    header #currTime{
+        font-size: 10vw;
+    }
     header #searchForm{
-        text-align: left;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #searchForm #userInput{
+        align-self: center;
+        font-size: 3.5vw;
+    }
+
+    #today #currentLocation{
+        font-size: 7.5vw;
+    }
+
+    .day .weekDay{
+        font-size: 7.5vw;
+    }
+
+    .day .icon img{
+        width: 35vw;
+        height: auto;
+    }
+
+    .day .dayForecast{
+        font-size: 5vw;
+    }
+
+    .day .temp{
+        font-size: 12.5vw;
     }
     footer{
         background: transparent;
@@ -225,6 +354,12 @@ and (max-device-height: 1366px),
 
     #arrowButtonDown, #arrowButtonUp{
         justify-content: center;
+        font-size: 15vw;
+    }
+
+    #submitButtonMobile{
+        display: flex;
+        height: 15vw;
     }
 
 }
