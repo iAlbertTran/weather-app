@@ -232,6 +232,9 @@ function setUpToday(data){
     document.getElementById("wind").textContent = data.query.results.channel.wind.speed;
     document.getElementById("humidity").textContent = data.query.results.channel.atmosphere.humidity;
 
+    var img = document.createElement('img');
+    img.src = "Assets/part-sun-01.png";
+    document.getElementById("todaysWeather").appendChild(img);
 }
 
 
@@ -247,7 +250,6 @@ function setUpWeatherBox(data){
     var curr = document.getElementById("currentLocation");
     curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
 
-
     //loops through to fill in the HTML based on the day
     for (var i = 1; i < 11; ++i) {
 
@@ -261,6 +263,11 @@ function setUpWeatherBox(data){
         weather.textContent = forecast[i - 1].text;
         high.textContent = forecast[i - 1].high;
         low.textContent = forecast[i - 1].low;
+
+        var img = document.createElement('img');
+        img.src = "Assets/part-sun-01.png";
+        img.id = "img" + i;
+        document.getElementById("icon" + i).appendChild(img);
     }
 }
 
