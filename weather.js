@@ -313,7 +313,7 @@ function setUpToday(data){
     }
     else {
         var img = document.createElement('img');
-        img.src = "Weather App2/" + weatherPerCode[correspondingWeather];
+        img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
         document.getElementById("todaysWeather").appendChild(img);
     }
