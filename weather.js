@@ -18,8 +18,7 @@ var weatherPerCode = ["sun-01.png", "part-sun-01.png", "cloud-01.png", "rain-01.
 var startPos;
 var endPos;
 var mobilePos = 1;
-var visibleBoxes;
-var spaceBetween;
+
 
 // Executed on load to get the positioning of the weather boxes equal
 
@@ -27,8 +26,8 @@ window.onload = window.onresize = function setUp() {
     startPos = 1;
     endPos = 5;
     mobilePos = 1;
-    var winSize = window.innerWidth;
-    if(winSize<= 480){
+
+    if(window.innerWidth <= 480){
         mobileSetup();
         document.getElementById("arrowButtonUp").style.display = "none";
         document.getElementById("arrowButtonDown").style.display = "flex";
@@ -41,29 +40,9 @@ window.onload = window.onresize = function setUp() {
         document.getElementById("rightArrow").classList.remove("hide");
         document.getElementById("arrowButtonUp").style.display = "none";
         document.getElementById("arrowButtonDown").style.display = "none";
-        if(winSize >= 1200){
-            visibleBoxes = 5;
-            spaceBetween = 4;
-        }
-
-        else if(winSize >= 968 && winSize < 1200){
-            visibleBoxes = 4;
-            spaceBetween = 3;
-        }
-
-        else if(winSize >= 728 && winSize < 968){
-            visibleBoxes = 3;
-            spaceBetween = 2;
-        }
-        else if(winSize >= 481 && winSize < 728){
-            visibleBoxes = 2;
-            spaceBetween = 3;
-        }
-
         desktopSetup();
     }
-};
-
+}
 
 function desktopSetup(){
     weatherBox = document.getElementById("weatherBox");
@@ -79,17 +58,12 @@ function desktopSetup(){
 
     // gets the total width of 5 day divs and determines the left over space in the weather box to be distributed
     // evenly between each displayed div. There are a total of 4 gaps between the divs.
-    totalDayBoxWidth = dayBoxWidth * visibleBoxes;
+    totalDayBoxWidth = dayBoxWidth * 5;
     leftOverSpace = weatherBoxWidth - totalDayBoxWidth;
+    leftOverSpace = leftOverSpace / 4;
 
-    leftOverSpace = leftOverSpace / spaceBetween;
 
     var pos = 0;
-
-    if(visibleBoxes === 2){
-        pos = leftOverSpace;
-    }
-
     // for loop to set the left property of each of the first 5 days.
     // Starts at left: 0 and then increments by leftOverSpace
     for (var i = 0; i < 10; i++) {
@@ -236,10 +210,6 @@ var allMonths = ["January", "February", "March", "April", "May", "June", "July",
 
 /* called when new weather arrives */
 function callbackFunction(data) {
-    if(data.query.results == null){
-        alert("Location not found. Please try another one.");
-        return;
-    }
     setUpToday(data);
     setUpWeatherBox(data);
 
@@ -288,15 +258,13 @@ function setUpToday(data){
     var curr = document.getElementById("currentLocation");
     curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
 
-
-    document.getElementById("todaysTemp").textContent = data.query.results.channel.item.condition.temp;
-    document.getElementById("todaysForecast").textContent = data.query.results.channel.item.condition.text;
+    var forecast = data.query.results.channel.item.forecast;
+    document.getElementById("todaysTemp").textContent = forecast[0].high;
+    document.getElementById("todaysForecast").textContent = forecast[0].text;
     document.getElementById("wind").textContent = data.query.results.channel.wind.speed + "mph";
     document.getElementById("humidity").textContent = data.query.results.channel.atmosphere.humidity + "%";
 
-    var forecast = data.query.results.channel.item.forecast;
     var code = forecast[0].code;
-
     for(var a = 0; a < 4; ++a){
         for(var b = 0; b < weatherCodes[a].length ; ++b){
             if (code == weatherCodes[a][b])
