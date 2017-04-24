@@ -1,9 +1,12 @@
-
+@font-face {
+    font-family: ProximaNovaLight;
+    src: url('ProximaNovaLight.otf');
+}
 body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-family: "Assistant", "Mukta Vaani", sans-serif;
+    font-family: ProximaNovaLight, "Mukta Vaani", sans-serif;
     background: linear-gradient(#3AAFDF, #161F62);
     min-height: 100vh;
     margin: 0;
@@ -15,7 +18,7 @@ header{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 2.5%;
+    margin-top: 1.5%;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -56,7 +59,6 @@ header p{
     flex: 1 0;
     margin-left: 10%;
     margin-right: 10%;
-    padding-bottom: 2%;
 }
 
 #todayInfo p{
@@ -87,7 +89,7 @@ header p{
 
 #today #todaysTemp{
     font-size: 600%;
-    background: url("WeatherApp 2/degree.png") no-repeat right 20%;
+    background: url("WeatherApp 2/degree.png") no-repeat right 15%;
     background-size: 15%;
     padding-right: 10%;
     padding-left: 10%;
@@ -166,7 +168,8 @@ main{
     justify-content: space-between;
     align-items: center;
     background: #3C85B0;
-    border-radius: 15px;
+    border-radius: 25px;
+    padding-top: 1%;
 }
 
 .day p{  margin: 0;  }
@@ -190,11 +193,9 @@ main{
 }
 
 .day .temp p{
-    background: url("WeatherApp 2/degree.png") no-repeat 90% 15%;
+    background: url("WeatherApp 2/degree.png") no-repeat 90% 20%;
     background-size: 15%;
-    padding-right: 10%;
-    padding-left: 10%;
-    padding-bottom: 10%;
+    padding: 5% 10% 10%;
 }
 
 .day .high{
@@ -238,7 +239,11 @@ main{
     margin-right: 1%;
 }
 
-
+#mobileArrows{
+    display: flex;
+    justify-content: center;
+    font-size: 10vw;
+}
 
 .hide{
     visibility: hidden;
@@ -340,18 +345,6 @@ footer img{
 
     .day .temp{
         font-size: 12.5vw;
-    }
-    footer{
-        background: transparent;
-    }
-    footer img{
-        display: none;
-
-    }
-
-    #arrowButtonDown, #arrowButtonUp{
-        justify-content: center;
-        font-size: 15vw;
     }
 
     #submitButtonMobile{
