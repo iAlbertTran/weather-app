@@ -6,7 +6,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    font-family: ProximaNovaLight, "Mukta Vaani", sans-serif;
+    font-family: ProximaNovaLight, sans-serif;
     background: linear-gradient(#3AAFDF, #161F62);
     min-height: 100vh;
     margin: 0;
@@ -14,29 +14,21 @@ body{
 }
 
 
+
+
+
+
+
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1.5%;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 1.5% 15% 0;
 }
 
-header #currTime{ font-size: 225%;
-}
-
+header #currTime{ font-size: 225%;  }
 header #todaysDate{ font-size: 125%; }
-
 header #searchForm{  text-align: right;  }
-
-#searchForm #userInput{
-    background: #C2DFE8;
-    border-style: none;
-    border-radius: 15px;
-    padding: 2.5% 10% 2.5% 5%;
-    font-size: 100%;
-}
 
 header #submitButton{
     background: #39C2EC;
@@ -47,9 +39,22 @@ header #submitButton{
     margin-top: 2%;
 }
 
-header p{
-    margin: 0;
+header p{  margin: 0;  }
+
+#searchForm #userInput{
+    background: #C2DFE8;
+    border-style: none;
+    border-radius: 15px;
+    padding: 2.5% 10% 2.5% 5%;
+    font-size: 100%;
 }
+
+
+
+
+
+
+
 
 
 #todayInfo{
@@ -57,29 +62,21 @@ header p{
     justify-content: space-between;
     align-items: center;
     flex: 1 0;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin: 0 15%;
 }
 
-#todayInfo p{
-    margin: 0;
-}
+#todayInfo div{  flex-grow: 1;  }
+#today #currentLocation{ font-size: 225%;  }
+#today #tempWithF{  display: flex;  }
+#today #todaysForecast{ font-size: 125%; }
+
+#todayInfo p{  margin: 0;  }
 
 #today{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-#todayInfo div{
-    flex-grow: 1;
-}
-
-#today #currentLocation{ font-size: 225%;  }
-
-#today #tempWithF{
-    display: flex;
 }
 
 #today #tempWithF #fahren{
@@ -89,20 +86,16 @@ header p{
 
 #today #todaysTemp{
     font-size: 600%;
-    background: url("WeatherApp 2/degree.png") no-repeat right 15%;
+    background: url("WeatherApp 2/degree.png") no-repeat right 10%;
     background-size: 15%;
-    padding-right: 10%;
-    padding-left: 10%;
+    padding: 0 10%;
     line-height: 1;
 }
-
-#today #todaysForecast{ font-size: 125%; }
 
 #todaysWeather{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
 }
 
 
@@ -111,6 +104,13 @@ header p{
     min-width: 150px;
     height: auto;
 }
+
+
+
+
+
+
+
 
 #humidityAndWind{
     display: flex;
@@ -125,18 +125,21 @@ header p{
     font-size: 100%;
 }
 
-#humidWindIcons{
-    align-items: flex-end;
-}
+#humidWindIcons{  align-items: flex-end;  }
+#humidWindText{  padding-left: 5%;  }
 
 #humidWindIcons img{
     width: 10%;
     min-width: 20px;
     height: auto;
 }
-#humidWindText{
-    padding-left: 5%;
-}
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +158,6 @@ main{
     width: 90vw;
 }
 
-
 .day {
     transition-property: left;
     transition-duration: 1s;
@@ -173,9 +175,7 @@ main{
 }
 
 .day p{  margin: 0;  }
-
 .day .weekDay{  font-size: 200%;  }
-
 .day .dayForecast{  font-size: 125%;  }
 
 .day .icon img{
@@ -198,13 +198,19 @@ main{
     padding: 5% 10% 10%;
 }
 
-.day .high{
-    font-weight: 900;
-}
+.day .high{  font-weight: 900;  }
+.day .low{  font-weight: 100;  }
 
-.day .low{
-    font-weight: 100;
-}
+
+
+
+
+
+
+
+
+
+
 #arrows{
     display: flex;
     justify-content: space-between;
@@ -229,32 +235,44 @@ main{
 
 
 #leftArrow{  justify-content: flex-start;  }
-#leftArrow p{
-    margin-left: 1%;
-}
-
-
+#leftArrow p{  margin-left: 1%;  }
 #rightArrow{  justify-content: flex-end;  }
-#rightArrow p{
-    margin-right: 1%;
-}
+#rightArrow p{  margin-right: 1%;  }
+
+
+
+
+
+
+
 
 #mobileArrows{
     display: flex;
     justify-content: center;
     font-size: 10vw;
 }
-
-.hide{
-    visibility: hidden;
+#arrowButtonUp, #arrowButtonDown, #submitButtonMobile{
+    display: none;
 }
+
+
+
+
+
+
+.hide{  visibility: hidden;  }
+
+
+
+
+
 
 footer{
     display: flex;
     justify-content: center;
     align-items: flex-end;
     width: 100vw;
-    background: black;
+
 }
 
 footer img{
@@ -264,15 +282,55 @@ footer img{
     min-height: 25px;
 }
 
-#arrowButtonUp, #arrowButtonDown, #submitButtonMobile{
-    display: none;
-}
+
+
+
+
+
 
 @media only screen and (max-width: 480px){
     html, body{
         height: 100%;
         width: 100%;
     }
+
+
+    header{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        margin: 2.5% 2.5% 5% 5%;
+    }
+
+    header #currTime{  font-size: 10vw;  }
+    header #searchForm{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #searchForm #userInput{
+        align-self: center;
+        font-size: 3.5vw;
+    }
+
+
+
+
+
+    #todayInfo{
+        flex: 0;
+        margin: 0 2.5% 5% 5%;
+    }
+
+    #today{  align-items: flex-start;  }
+    #today #tempWithF #fahren{  displaY: none;  }
+    #today #currentLocation{  font-size: 7.5vw;  }
+
+
+
+
+
+
 
     #weatherBox{
         flex-direction: column;
@@ -289,63 +347,26 @@ footer img{
         transition-property: top;
     }
 
-    .arrow, #todaysWeather, #humidityAndWind, #todaysTemp, #todaysForecast, #todaysDate, #submitButton, #humidity, #wind{
-        display: none;
-    }
-
-    #todayInfo{
-        flex: 0;
-        margin: 0 2.5% 5% 5%;
-    }
-
-    #today{
-        align-items: flex-start;
-    }
-
-    #today #tempWithF #fahren{
-        displaY: none;
-    }
-
-    header{
-        flex-direction: column-reverse;
-        align-items: flex-start;
-        margin: 2.5% 2.5% 5% 5%;
-    }
-
-    header #currTime{
-        font-size: 10vw;
-    }
-    header #searchForm{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #searchForm #userInput{
-        align-self: center;
-        font-size: 3.5vw;
-    }
-
-    #today #currentLocation{
-        font-size: 7.5vw;
-    }
-
-    .day .weekDay{
-        font-size: 7.5vw;
-    }
+    .day .weekDay{  font-size: 7.5vw;  }
+    .day .dayForecast{  font-size: 5vw;  }
+    .day .temp{  font-size: 12.5vw;  }
 
     .day .icon img{
         width: 35vw;
         height: auto;
     }
 
-    .day .dayForecast{
-        font-size: 5vw;
+
+
+
+
+    .arrow, #todaysWeather, #humidityAndWind, #todaysTemp, #todaysForecast, #todaysDate, #submitButton, #humidity, #wind{
+        display: none;
     }
 
-    .day .temp{
-        font-size: 12.5vw;
-    }
+
+
+
 
     #submitButtonMobile{
         display: flex;
