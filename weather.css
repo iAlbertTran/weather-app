@@ -87,7 +87,7 @@ header p{
 
 #today #todaysTemp{
     font-size: 600%;
-    background: url("Assets/degree-01.png") no-repeat right 20%;
+    background: url("WeatherApp 2/degree.png") no-repeat right 20%;
     background-size: 15%;
     padding-right: 10%;
     padding-left: 10%;
@@ -190,7 +190,7 @@ main{
 }
 
 .day .temp p{
-    background: url("Assets/degree-01.png") no-repeat 90% 15%;
+    background: url("WeatherApp 2/degree.png") no-repeat 90% 15%;
     background-size: 15%;
     padding-right: 10%;
     padding-left: 10%;

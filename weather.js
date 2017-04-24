@@ -7,11 +7,13 @@ var totalDayBoxWidth;
 var leftOverSpace;
 var weatherCodes = [
     [23, 31, 32, 33, 34, 36],
-    [29, 30],
+    [29, 30, 44],
     [26, 27, 28],
-    [8, 9, 11, 12, 35, 40, 45, 47]];
+    [6, 8, 9, 10, 11, 12, 35, 40],
+    [0, 1, 2, 3, 4, 37, 38, 39, 45, 47],
+    [5, 7, 13, 14, 15, 16, 41, 42, 43, 46]];
 
-var weatherPerCode = ["sun-01.png", "part-sun-01.png", "cloud-01.png", "rain-01.png"];
+var weatherPerCode = ["sunny.png", "part-sun.png", "cloud.png", "rain.png", "thunder.png", "snow.png"];
 
 // startPos designates which day is the left most displayed box
 // endPos designates which day is the right most displayed box
@@ -237,7 +239,7 @@ var allMonths = ["January", "February", "March", "April", "May", "June", "July",
 /* called when new weather arrives */
 function callbackFunction(data) {
     if(data.query.results == null){
-        alert("Location not found. Please try another one.");
+        alert("Location not found, or too broad. Please try another one.");
         return;
     }
     setUpToday(data);
@@ -307,11 +309,11 @@ function setUpToday(data){
 
     if(todayIcon.childElementCount > 0){
         var todaysImg = document.getElementById("todaysImg");
-        todaysImg.src = "Assets/" + weatherPerCode[correspondingWeather];
+        todaysImg.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
     }
     else {
         var img = document.createElement('img');
-        img.src = "Assets/" + weatherPerCode[correspondingWeather];
+        img.src = "Weather App2/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
         document.getElementById("todaysWeather").appendChild(img);
     }
@@ -354,11 +356,11 @@ function setUpWeatherBox(data){
 
         if(dayIcon.childElementCount > 0){
             var iconImg = document.getElementById("img" + i)
-            iconImg.src = "Assets/" + weatherPerCode[correspondingWeather];
+            iconImg.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
         }
         else {
             var img = document.createElement('img');
-            img.src = "Assets/" + weatherPerCode[correspondingWeather];
+            img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
             img.id = "img" + i;
             document.getElementById("icon" + i).appendChild(img);
         }
