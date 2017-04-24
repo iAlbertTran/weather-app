@@ -299,7 +299,7 @@ function setUpToday(data){
     var forecast = data.query.results.channel.item.forecast;
     var code = forecast[0].code;
 
-    for(var a = 0; a < 4; ++a){
+    for(var a = 0; a < weatherCodes.length; ++a){
         for(var b = 0; b < weatherCodes[a].length ; ++b){
             if (code == weatherCodes[a][b])
                 var correspondingWeather = a;
@@ -315,12 +315,16 @@ function setUpToday(data){
         var img = document.createElement('img');
         img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
+        img.alt = "A weather icon";
         document.getElementById("todaysWeather").appendChild(img);
     }
 }
 
 
 function setUpWeatherBox(data){
+    startPos = 1;
+    endPos = 5;
+    mobilePos = 1;
     // Month array used to get the full name from an abbreviation
     // Extracts the forecast information needed from data
     var forecast = data.query.results.channel.item.forecast;
@@ -345,7 +349,7 @@ function setUpWeatherBox(data){
 
         var code = forecast[i-1].code;
 
-        for(var a = 0; a < 4; ++a){
+        for(var a = 0; a < weatherCodes.length ; ++a){
             for(var b = 0; b < weatherCodes[a].length ; ++b){
                 if (code == weatherCodes[a][b])
                     var correspondingWeather = a;
@@ -362,6 +366,7 @@ function setUpWeatherBox(data){
             var img = document.createElement('img');
             img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
             img.id = "img" + i;
+            img.alt = "A weather icon";
             document.getElementById("icon" + i).appendChild(img);
         }
     }
