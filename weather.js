@@ -309,11 +309,11 @@ function setUpToday(data){
 
     if(todayIcon.childElementCount > 0){
         var todaysImg = document.getElementById("todaysImg");
-        todaysImg.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
+        todaysImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
     }
     else {
         var img = document.createElement('img');
-        img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
+        img.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
         img.alt = "A weather icon";
         document.getElementById("todaysWeather").appendChild(img);
@@ -360,11 +360,11 @@ function setUpWeatherBox(data){
 
         if(dayIcon.childElementCount > 0){
             var iconImg = document.getElementById("img" + i)
-            iconImg.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
+            iconImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
         }
         else {
             var img = document.createElement('img');
-            img.src = "WeatherApp 2/" + weatherPerCode[correspondingWeather];
+            img.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
             img.id = "img" + i;
             img.alt = "A weather icon";
             document.getElementById("icon" + i).appendChild(img);
@@ -381,7 +381,7 @@ function gotNewPlace() {
     var script = document.createElement('script');
 
     // start making the complicated URL
-    script.src = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+newPlace+"')&format=json&callback=callbackFunction"
+    script.src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text='"+newPlace+"')&format=json&callback=callbackFunction"
     script.id = "APILink";
 
     // remove old script
