@@ -1,11 +1,11 @@
-// Global variables to be shared between the first three functions, to avoid repetitive declarations
+// Global variables to be shared between the functions, to avoid repetitive declarations
 var weatherBox;
 var weatherBoxWidth;
 var dayBox;
 var dayBoxWidth;
 var totalDayBoxWidth;
 var leftOverSpace;
-var weatherCodes = [
+var weatherCodes = [                            // Weather codes based on Yahoo's API documentation
     [23, 31, 32, 33, 34, 36],
     [29, 30, 44],
     [26, 27, 28],
@@ -17,14 +17,18 @@ var weatherPerCode = ["sunny.png", "part-sun.png", "cloud.png", "rain.png", "thu
 
 // startPos designates which day is the left most displayed box
 // endPos designates which day is the right most displayed box
+// mobilePos designates the day currently being displayed
 var startPos;
 var endPos;
 var mobilePos = 1;
+
+// used to determine how many boxes should be displayed based on window size, and the number of spaces between them
 var visibleBoxes;
 var spaceBetween;
 
-// Executed on load to get the positioning of the weather boxes equal
-
+// Excuted on load and on resize
+// Gets the window width and executes either the desktop setup or mobile setup up based on its size. Declares how
+// many boxes should be displayed and the number of spaces between them
 window.onload = window.onresize = function setUp() {
     startPos = 1;
     endPos = 5;
@@ -67,6 +71,7 @@ window.onload = window.onresize = function setUp() {
 };
 
 
+
 function desktopSetup(){
     weatherBox = document.getElementById("weatherBox");
     weatherBoxWidth = weatherBox.getBoundingClientRect().width;
@@ -79,8 +84,8 @@ function desktopSetup(){
     dayBoxWidth = dayBox.getBoundingClientRect().width;
 
 
-    // gets the total width of 5 day divs and determines the left over space in the weather box to be distributed
-    // evenly between each displayed div. There are a total of 4 gaps between the divs.
+    // gets the total width of the number of visible boxes and determines the left over space in the weather box to be distributed
+    // evenly between each displayed div. There are a total of "spaceBetween" gaps between each div.
     totalDayBoxWidth = dayBoxWidth * visibleBoxes;
     leftOverSpace = weatherBoxWidth - totalDayBoxWidth;
 
@@ -101,13 +106,20 @@ function desktopSetup(){
         pos = pos + leftOverSpace;
     }
 }
+
+
+
+//variables for the mobileSetup
 var mobileWeatherBox;
 var mobileWeatherBoxHeight;
 var mobileDayBox;
 var mobileDayBoxHeight;
 var mobileLeftOverSpace;
 
+
+//does all the same things as desktop setup, except the carousel is setup vertically.
 function mobileSetup(){
+
     mobileWeatherBox = document.getElementById("weatherBox");
     mobileWeatherBoxHeight = mobileWeatherBox.getBoundingClientRect().height;
     mobileDayBox = document.getElementById("day1");
@@ -126,6 +138,11 @@ function mobileSetup(){
     document.getElementById("arrowButtonDown").style.display = "flex";
 }
 
+
+
+// next four functions implements the responsiveness of the arrows
+// left and right on desktop setup
+// up and down on mobile setup
 document.getElementById("arrowButtonRight").onclick = function(){
 
     //increments to keep track of which days are being displayed
@@ -194,14 +211,14 @@ document.getElementById("arrowButtonDown").onclick = function(){
     //increments to keep track of which day is being displayed
     ++mobilePos;
 
-
+    // if the display is day 10, hides the down arrow, if it is not showing day 1, show the up arrow
     if(mobilePos === 10)
         document.getElementById("arrowButtonDown").style.display = "none";
     if(mobilePos !== 1)
         document.getElementById("arrowButtonUp").style.display = "flex";
 
 
-
+    // calculates how to evenly transition the boxes.
     var pos = mobileLeftOverSpace + mobileDayBoxHeight;
     for(var i = 1; i<11; ++i){
         var dayPos = parseFloat(document.getElementById("day" + i).style.top);
@@ -217,12 +234,14 @@ document.getElementById("arrowButtonUp").onclick = function(){
     //increments to keep track of which day is being displayed
     --mobilePos;
 
-
+    // if day 10 isnt showing, show the down arrow, if day 1 is showing, hide the up arrow
     if(mobilePos !== 10)
         document.getElementById("arrowButtonDown").style.display = "flex";
     if(mobilePos === 1)
         document.getElementById("arrowButtonUp").style.display = "none";
 
+
+    // calculate how to evenly transition the boxes.
     var pos = mobileLeftOverSpace + mobileDayBoxHeight;
     for(var i = 1; i<11; ++i){
         var dayPos = parseFloat(document.getElementById("day" + i).style.top);
@@ -230,29 +249,34 @@ document.getElementById("arrowButtonUp").onclick = function(){
         document.getElementById("day" + i).style.top = dayPos + "px";
     }
 };
-/**
- * Created by AlbertTMAC on 4/21/17.
- */
+
+
+// used to get the full name of a month, which is abbreviated in Yahoo's weather API
 var allMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 /* called when new weather arrives */
+// sets up all the boxes and places the information in the correct places.
 function callbackFunction(data) {
+
+    // if Yahoo's API returns null, the location doesn't exist or is too broad so it fires off an alert message
     if(data.query.results == null){
         alert("Location not found, or too broad. Please try another one.");
         return;
     }
+
+
     setUpToday(data);
     setUpWeatherBox(data);
 
+
+    //same thing as what the setup function above does, so it also does it when a new location is inputted
     if(window.innerWidth <= 480){
         mobileSetup();
         document.getElementById("arrowButtonUp").style.display = "none";
         document.getElementById("arrowButtonDown").style.display = "flex";
     }
 
-    // gets the weatherBox div, and finds its width. Uses getBoundingClientRect because offsetWidth and clientWidth
-    // both round to the nearest integer
     else{
         document.getElementById("leftArrow").classList.add("hide");
         document.getElementById("rightArrow").classList.remove("hide");
@@ -263,22 +287,31 @@ function callbackFunction(data) {
 
 }
 
+
+//sets up all the information for the current date
 function setUpToday(data){
 
+    // takes the date and parses it to extract the time, and date.
     var dateTime = data.query.results.channel.lastBuildDate;
     var dateTimeArr = dateTime.split(" ");
     var date = dateTimeArr.slice(1, 4);
-
     var time = dateTimeArr.slice(4,6);
     var timeArr = time[0].split("");
+
+
+    // removes any leading zeros in the time
     if(timeArr[0] === '0'){
         timeArr.shift();
         time[0] = timeArr.join("");
     }
+
+
     document.getElementById("currTime").textContent = "Today " + time[0] + time[1].toLowerCase();
 
     var month = date[1];
 
+
+    // finds the full name of the month based on abbreviation
     for(var j = 0; j < 12; ++j) {
         if (allMonths[j].indexOf(month) >= 0)
             month = allMonths[j];
@@ -286,6 +319,8 @@ function setUpToday(data){
 
     document.getElementById("todaysDate").textContent = month + " " + date[0] + ", " + date[2];
 
+
+    // finds the location the information is for
     var location = data.query.results.channel.location;
     var curr = document.getElementById("currentLocation");
     curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
@@ -299,6 +334,8 @@ function setUpToday(data){
     var forecast = data.query.results.channel.item.forecast;
     var code = forecast[0].code;
 
+
+    // uses the weather code to find the corresponding weather icon to be used
     for(var a = 0; a < weatherCodes.length; ++a){
         for(var b = 0; b < weatherCodes[a].length ; ++b){
             if (code == weatherCodes[a][b])
@@ -307,10 +344,14 @@ function setUpToday(data){
     }
     var todayIcon = document.getElementById("todaysWeather");
 
+
+    // if there exists an icon already, merely replaces the src
     if(todayIcon.childElementCount > 0){
         var todaysImg = document.getElementById("todaysImg");
         todaysImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
     }
+
+    //if not, creates an img element and inserts the image into the html
     else {
         var img = document.createElement('img');
         img.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
@@ -321,16 +362,16 @@ function setUpToday(data){
 }
 
 
+
+// sets up the 10 day forecast's information
 function setUpWeatherBox(data){
     startPos = 1;
     endPos = 5;
     mobilePos = 1;
-    // Month array used to get the full name from an abbreviation
+
     // Extracts the forecast information needed from data
     var forecast = data.query.results.channel.item.forecast;
 
-
-    // Finds what the location the weather is for, then places it in the header
 
     //loops through to fill in the HTML based on the day
     for (var i = 1; i < 11; ++i) {
@@ -358,6 +399,8 @@ function setUpWeatherBox(data){
 
         var dayIcon = document.getElementById("icon" + i);
 
+
+        // same as above for filling in the correct weather icon
         if(dayIcon.childElementCount > 0){
             var iconImg = document.getElementById("img" + i)
             iconImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
@@ -373,6 +416,9 @@ function setUpWeatherBox(data){
 }
 
 
+
+// function used to create a new script and fires off the callback when a new location is searched. Taken from
+// professor amenta's example weather app javascript file
 function gotNewPlace() {
     // get what the user put into the textbox
     var newPlace = document.getElementById("userInput").value;
