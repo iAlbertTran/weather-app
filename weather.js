@@ -348,13 +348,13 @@ function setUpToday(data){
     // if there exists an icon already, merely replaces the src
     if(todayIcon.childElementCount > 0){
         var todaysImg = document.getElementById("todaysImg");
-        todaysImg.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
+        todaysImg.src = "/WeatherApp%203/" + weatherPerCode[correspondingWeather];
     }
 
     //if not, creates an img element and inserts the image into the html
     else {
         var img = document.createElement('img');
-        img.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
+        img.src = "/WeatherApp%203/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
         img.alt = "A weather icon";
         document.getElementById("todaysWeather").appendChild(img);
@@ -403,11 +403,11 @@ function setUpWeatherBox(data){
         // same as above for filling in the correct weather icon
         if(dayIcon.childElementCount > 0){
             var iconImg = document.getElementById("img" + i)
-            iconImg.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
+            iconImg.src = "/WeatherApp%203/" + weatherPerCode[correspondingWeather];
         }
         else {
             var img = document.createElement('img');
-            img.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
+            img.src = "/WeatherApp%203/" + weatherPerCode[correspondingWeather];
             img.id = "img" + i;
             img.alt = "A weather icon";
             document.getElementById("icon" + i).appendChild(img);
