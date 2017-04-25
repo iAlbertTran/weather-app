@@ -13,7 +13,7 @@ var weatherCodes = [                            // Weather codes based on Yahoo'
     [0, 1, 2, 3, 4, 37, 38, 39, 45, 47],
     [5, 7, 13, 14, 15, 16, 41, 42, 43, 46]];
 
-var weatherPerCode = ["sunny.png", "part-sun.png", "cloud.png", "rain.png", "thunder.png", "snow.png"];
+var weatherPerCode = ["sunny.png", "part-sun.png", "cloudy.png", "rain.png", "thunder.png", "snow.png"];
 
 // startPos designates which day is the left most displayed box
 // endPos designates which day is the right most displayed box
@@ -348,13 +348,13 @@ function setUpToday(data){
     // if there exists an icon already, merely replaces the src
     if(todayIcon.childElementCount > 0){
         var todaysImg = document.getElementById("todaysImg");
-        todaysImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
+        todaysImg.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
     }
 
     //if not, creates an img element and inserts the image into the html
     else {
         var img = document.createElement('img');
-        img.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
+        img.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
         img.id = "todaysImg";
         img.alt = "A weather icon";
         document.getElementById("todaysWeather").appendChild(img);
@@ -403,11 +403,11 @@ function setUpWeatherBox(data){
         // same as above for filling in the correct weather icon
         if(dayIcon.childElementCount > 0){
             var iconImg = document.getElementById("img" + i)
-            iconImg.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
+            iconImg.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
         }
         else {
             var img = document.createElement('img');
-            img.src = "WeatherApp%202/" + weatherPerCode[correspondingWeather];
+            img.src = "../WeatherApp%203/" + weatherPerCode[correspondingWeather];
             img.id = "img" + i;
             img.alt = "A weather icon";
             document.getElementById("icon" + i).appendChild(img);

@@ -1,6 +1,6 @@
 @font-face {
     font-family: ProximaNovaLight;
-    src: url('ProximaNovaLight.otf');
+    src: url('myCode/ProximaNovaLight.otf');
 }
 body{
     display: flex;
@@ -86,7 +86,7 @@ header p{  margin: 0;  }
 
 #today #todaysTemp{
     font-size: 600%;
-    background: url("WeatherApp 2/degree.png") no-repeat right 10%;
+    background: url("WeatherApp 3/degree.png") no-repeat right 10%;
     background-size: 15%;
     padding: 0 10%;
     line-height: 1;
@@ -175,8 +175,8 @@ main{
 }
 
 .day p{  margin: 0;  }
-.day .weekDay{  font-size: 200%;  }
-.day .dayForecast{  font-size: 125%;  }
+.day .weekDay{  font-size: 150%;  }
+.day .dayForecast{  font-size: 100%;  }
 
 .day .icon img{
     width: 100%;
@@ -193,7 +193,7 @@ main{
 }
 
 .day .temp p{
-    background: url("WeatherApp 2/degree.png") no-repeat 90% 20%;
+    background: url("WeatherApp 3/degree.png") no-repeat 90% 20%;
     background-size: 15%;
     padding: 5% 10% 10%;
 }
