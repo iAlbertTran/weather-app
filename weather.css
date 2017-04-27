@@ -26,8 +26,8 @@ header{
     margin: 1.5% 15% 0;
 }
 
-header #currTime{ font-size: 225%;  }
-header #todaysDate{ font-size: 125%; }
+header #currTime{ font-size: 225%; margin-bottom: 5%}
+header #todaysDate{ font-size: 125%;}
 header #searchForm{  text-align: right;  }
 
 header #submitButton{
@@ -61,14 +61,14 @@ header p{  margin: 0;  }
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex: 1 0;
+    flex: 1 0 100%;
     margin: 0 15%;
 }
 
-#todayInfo div{  flex-grow: 1;  }
-#today #currentLocation{ font-size: 225%;  }
-#today #tempWithF{  display: flex;  }
-#today #todaysForecast{ font-size: 125%; }
+#todayInfo div{  flex-grow: 1;}
+#today #currentLocation{ font-size: 300%; margin-bottom: 5%; }
+#today #tempWithF{  display: flex;  margin-bottom: 5%;}
+#today #todaysForecast{ font-size: 150%; }
 
 #todayInfo p{  margin: 0;  }
 
@@ -127,6 +127,7 @@ header p{  margin: 0;  }
 #humidWindIcons{  align-items: flex-end;  }
 #humidWindText{  padding-left: 5%;  }
 
+#humidWindIcons #humidityIcon, #humidWindText #humidity{  margin-bottom: 10%;  }
 #humidWindIcons img{
     width: 15%;
     min-width: 20px;
@@ -290,7 +291,7 @@ footer img{
     header{
         flex-direction: column-reverse;
         align-items: flex-start;
-        margin: 2.5% 2.5% 5% 5%;
+        margin: 2.5% 2.5% 10% 5%;
     }
 
     header #currTime{  font-size: 10vw;  }
