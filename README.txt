@@ -12,3 +12,4 @@ Some things to notice:
     - has to do with the font being used and it's thickness.
 - A special font I have was used for the font styling, called ProximaNovaLight. That file is included as well.
 - Every time the window is resized, or a new location is searched, the carousel will jump back to day 1 as it redistributes the space for the number of forecast days that should be displayed.
+- The folder that contains all the forecast images, arrows, etc should be named "WeatherApp 3".
