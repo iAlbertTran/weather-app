@@ -1,6 +1,6 @@
 @font-face {
     font-family: ProximaNovaLight;
-    src: url('myCode/ProximaNovaLight.otf');
+    src: url('ProximaNovaLight.otf');
 }
 body{
     display: flex;
@@ -79,16 +79,15 @@ header p{  margin: 0;  }
     justify-content: center;
 }
 
+#today #tempWithF #degree{  font-size: 400%;  }
 #today #tempWithF #fahren{
-    padding-top: 10%;
     font-size: 150%;
+    padding-top: 10%;
+    font-weight: 900;
 }
 
 #today #todaysTemp{
     font-size: 600%;
-    background: url("WeatherApp 3/degree.png") no-repeat right 10%;
-    background-size: 15%;
-    padding: 0 10%;
     line-height: 1;
 }
 
@@ -122,14 +121,14 @@ header p{  margin: 0;  }
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    font-size: 100%;
+    font-size: 150%;
 }
 
 #humidWindIcons{  align-items: flex-end;  }
 #humidWindText{  padding-left: 5%;  }
 
 #humidWindIcons img{
-    width: 10%;
+    width: 15%;
     min-width: 20px;
     height: auto;
 }
@@ -157,7 +156,6 @@ main{
     flex-basis: 100%;
     width: 90vw;
 }
-
 .day {
     transition-property: left;
     transition-duration: 1s;
@@ -171,11 +169,13 @@ main{
     align-items: center;
     background: #3C85B0;
     border-radius: 25px;
-    padding-top: 1%;
 }
 
 .day p{  margin: 0;  }
-.day .weekDay{  font-size: 150%;  }
+.day .weekDay{
+    font-size: 150%;
+    padding-top: 5%;
+}
 .day .dayForecast{  font-size: 100%;  }
 
 .day .icon img{
@@ -187,17 +187,11 @@ main{
     display: flex;
     justify-content: space-between;
     font-size: 250%;
-    line-height: 1;
-    width: 75%;
+    width: 80%;
 
 }
 
-.day .temp p{
-    background: url("WeatherApp 3/degree.png") no-repeat 90% 20%;
-    background-size: 15%;
-    padding: 5% 10% 10%;
-}
-
+.day .temp .high, .day .temp .low{  display: flex;  padding: 5%;}
 .day .high{  font-weight: 900;  }
 .day .low{  font-weight: 100;  }
 
@@ -251,9 +245,7 @@ main{
     justify-content: center;
     font-size: 10vw;
 }
-#arrowButtonUp, #arrowButtonDown, #submitButtonMobile{
-    display: none;
-}
+#arrowButtonUp, #arrowButtonDown, #submitButtonMobile{  display: none;  }
 
 
 
@@ -325,7 +317,7 @@ footer img{
     #today{  align-items: flex-start;  }
     #today #tempWithF #fahren{  displaY: none;  }
     #today #currentLocation{  font-size: 7.5vw;  }
-
+    #today #tempWithF #degree{ display: none;}
 
 
 
