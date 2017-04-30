@@ -30,8 +30,7 @@ var spaceBetween;
 // Gets the window width and executes either the desktop setup or mobile setup up based on its size. Declares how
 // many boxes should be displayed and the number of spaces between them
 window.onload = window.onresize = function setUp() {
-    startPos = 1;
-    endPos = 5;
+   
     mobilePos = 1;
     var winSize = window.innerWidth;
     if(winSize<= 480){
@@ -48,20 +47,28 @@ window.onload = window.onresize = function setUp() {
         document.getElementById("arrowButtonUp").style.display = "none";
         document.getElementById("arrowButtonDown").style.display = "none";
         if(winSize >= 1200){
+			startPos = 1;
+			endPos = 5;
             visibleBoxes = 5;
             spaceBetween = 4;
         }
 
         else if(winSize >= 968 && winSize < 1200){
+			startPos = 1;
+			endPos = 4;
             visibleBoxes = 4;
             spaceBetween = 3;
         }
 
         else if(winSize >= 728 && winSize < 968){
+			startPos = 1;
+			endPos = 3;
             visibleBoxes = 3;
             spaceBetween = 2;
         }
         else if(winSize >= 481 && winSize < 728){
+			startPos = 1;
+			endPos = 2;
             visibleBoxes = 2;
             spaceBetween = 3;
         }
