@@ -25,12 +25,15 @@ var mobilePos = 1;
 // used to determine how many boxes should be displayed based on window size, and the number of spaces between them
 var visibleBoxes;
 var spaceBetween;
-
+var firstLoad = true;
 // Excuted on load and on resize
 // Gets the window width and executes either the desktop setup or mobile setup up based on its size. Declares how
 // many boxes should be displayed and the number of spaces between them
 window.onload = window.onresize = function setUp() {
-   
+   if(firstLoad){
+    initialQuery();
+    firstLoad = false;
+   }
     mobilePos = 1;
     var winSize = window.innerWidth;
     if(winSize<= 480){
@@ -77,6 +80,22 @@ window.onload = window.onresize = function setUp() {
     }
 };
 
+function initialQuery(){
+    var url = "http://localhost:3000/query?op=weather&location=sunnyvale,ca";
+
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", url);
+
+    oReq.send();
+
+    // becomes method of request object oReq
+    function reqListener () {
+        console.log(oReq.responseText);
+        var j = JSON.parse(oReq.responseText);
+        callbackFunction(j);
+    }
+}
 
 
 function desktopSetup(){
@@ -267,7 +286,7 @@ var allMonths = ["January", "February", "March", "April", "May", "June", "July",
 function callbackFunction(data) {
 
     // if Yahoo's API returns null, the location doesn't exist or is too broad so it fires off an alert message
-    if(data.query.results == null){
+    if(data == null){
         alert("Location not found, or too broad. Please try another one.");
         return;
     }
@@ -299,11 +318,15 @@ function callbackFunction(data) {
 function setUpToday(data){
 
     // takes the date and parses it to extract the time, and date.
-    var dateTime = data.query.results.channel.lastBuildDate;
+    var unixToDate = new Date(data.current_observation.pubDate * 1000).toString();
+    console.log(unixToDate);
+    var dateTime = unixToDate;
     var dateTimeArr = dateTime.split(" ");
     var date = dateTimeArr.slice(1, 4);
     var time = dateTimeArr.slice(4,6);
     var timeArr = time[0].split("");
+
+    
 
 
     // removes any leading zeros in the time

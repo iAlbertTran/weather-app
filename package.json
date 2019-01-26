@@ -1,0 +1,24 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Converting weather-app to node project",
+  "main": "server.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iAlbertTran/weather-app.git"
+  },
+  "author": "Albert Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iAlbertTran/weather-app/issues"
+  },
+  "homepage": "https://github.com/iAlbertTran/weather-app#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "oauth": "^0.9.15",
+    "querystring": "^0.2.0"
+  }
+}
