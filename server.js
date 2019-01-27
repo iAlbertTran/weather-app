@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const port = 5000;
 var querystring = require('querystring');
 var OAuth = require('oauth');
 var header = {
@@ -33,7 +32,7 @@ app.get('/query', function (request, response){
 });
 
 
-app.listen(port);
+app.listen(process.env.PORT || 3000);
 
 
 
