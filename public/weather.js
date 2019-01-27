@@ -284,9 +284,8 @@ var allMonths = ["January", "February", "March", "April", "May", "June", "July",
 /* called when new weather arrives */
 // sets up all the boxes and places the information in the correct places.
 function callbackFunction(data) {
-
     // if Yahoo's API returns null, the location doesn't exist or is too broad so it fires off an alert message
-    if(data == null){
+    if(Object.keys(data.current_observation).length  <= 0 && data.forecasts.length <= 0 && Object.keys(data.location).length  <= 0){
         alert("Location not found, or too broad. Please try another one.");
         return;
     }
@@ -317,27 +316,18 @@ function callbackFunction(data) {
 //sets up all the information for the current date
 function setUpToday(data){
 
+    let currentObservation = data.current_observation;
     // takes the date and parses it to extract the time, and date.
-    var unixToDate = new Date(data.current_observation.pubDate * 1000).toString();
-    console.log(unixToDate);
-    var dateTime = unixToDate;
+    var unixToDate = new Date(currentObservation.pubDate * 1000);
+    var dateTime = unixToDate.toLocaleString();
     var dateTimeArr = dateTime.split(" ");
-    var date = dateTimeArr.slice(1, 4);
-    var time = dateTimeArr.slice(4,6);
-    var timeArr = time[0].split("");
-
-    
+    var timeArr = dateTimeArr[1].split(":");
+    let time = `${timeArr[0]}:${timeArr[1]} ${dateTimeArr[2]}`;
 
 
-    // removes any leading zeros in the time
-    if(timeArr[0] === '0'){
-        timeArr.shift();
-        time[0] = timeArr.join("");
-    }
+    document.getElementById("currTime").textContent = "Today " + time;
 
-
-    document.getElementById("currTime").textContent = "Today " + time[0] + time[1].toLowerCase();
-
+    let date = unixToDate.toString().split(' ');
     var month = date[1];
 
 
@@ -347,22 +337,26 @@ function setUpToday(data){
             month = allMonths[j];
     }
 
-    document.getElementById("todaysDate").textContent = month + " " + date[0] + ", " + date[2];
+    document.getElementById("todaysDate").textContent = month + " " + date[2] + ", " + date[3];
 
 
     // finds the location the information is for
-    var location = data.query.results.channel.location;
+    var location = data.location;
     var curr = document.getElementById("currentLocation");
     curr.textContent = JSON.parse(JSON.stringify(location.city + ", " + location.region));
 
 
-    document.getElementById("todaysTemp").textContent = data.query.results.channel.item.condition.temp;
-    document.getElementById("todaysForecast").textContent = data.query.results.channel.item.condition.text;
-    document.getElementById("wind").textContent = data.query.results.channel.wind.speed + "mph";
-    document.getElementById("humidity").textContent = data.query.results.channel.atmosphere.humidity + "%";
+    let conditions = currentObservation.condition;
+    document.getElementById("todaysTemp").textContent = conditions.temperature;
+    document.getElementById("todaysForecast").textContent = conditions.text;
 
-    var forecast = data.query.results.channel.item.forecast;
-    var code = forecast[0].code;
+    let wind = currentObservation.wind;
+    document.getElementById("wind").textContent = wind.speed + "mph";
+
+    let atmosphere = currentObservation.atmosphere;
+    document.getElementById("humidity").textContent = atmosphere.humidity + "%";
+
+    var code = conditions.code;
 
 
     // uses the weather code to find the corresponding weather icon to be used
@@ -400,7 +394,7 @@ function setUpWeatherBox(data){
     mobilePos = 1;
 
     // Extracts the forecast information needed from data
-    var forecast = data.query.results.channel.item.forecast;
+    var forecast = data.forecasts;
 
 
     //loops through to fill in the HTML based on the day
@@ -453,19 +447,18 @@ function gotNewPlace() {
     // get what the user put into the textbox
     var newPlace = document.getElementById("userInput").value;
 
-    // make a new script element
-    var script = document.createElement('script');
+    var url = `http://localhost:3000/query?op=weather&location=${newPlace}`;
 
-    // start making the complicated URL
-    script.src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text='"+newPlace+"')&format=json&callback=callbackFunction"
-    script.id = "APILink";
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", url);
 
-    // remove old script
-    var oldScript = document.getElementById("APIlink");
-    if (oldScript != null) {
-        document.body.removeChild(oldScript);
+    oReq.send();
+
+    // becomes method of request object oReq
+    function reqListener () {
+        console.log(oReq.responseText);
+        var j = JSON.parse(oReq.responseText);
+        callbackFunction(j);
     }
-
-    // put new script into DOM at bottom of body
-    document.body.appendChild(script);
 }
