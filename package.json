@@ -20,5 +20,8 @@
     "express": "^4.16.4",
     "oauth": "^0.9.15",
     "querystring": "^0.2.0"
+  },
+  "engines": {
+    "node": "9.4.x"
   }
 }

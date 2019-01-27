@@ -81,7 +81,7 @@ window.onload = window.onresize = function setUp() {
 };
 
 function initialQuery(){
-    var url = "http://localhost:3000/query?op=weather&location=sunnyvale,ca";
+    var url = "http://localhost:3000/query?op=weather&location=sf,ca";
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
@@ -91,7 +91,6 @@ function initialQuery(){
 
     // becomes method of request object oReq
     function reqListener () {
-        console.log(oReq.responseText);
         var j = JSON.parse(oReq.responseText);
         callbackFunction(j);
     }
@@ -457,7 +456,6 @@ function gotNewPlace() {
 
     // becomes method of request object oReq
     function reqListener () {
-        console.log(oReq.responseText);
         var j = JSON.parse(oReq.responseText);
         callbackFunction(j);
     }
