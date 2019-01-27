@@ -6,6 +6,16 @@
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
     </head>
 
-    <body onload=window.location='https://att-weather-app.herokuapp.com/'>
+    <script>
+        function redirect(){
+            setTimeout(() => {
+                window.location='https://att-weather-app.herokuapp.com/'
+            }, 10000);
+        }
+    </script>
+    <body onload=redirect()>
+        <h1>Thank you for visiting my weather-app.</h1>
+        <h2>Weather-app has been moved from github to heroku, due to a project update to a node / express project.</h2>
+        <h2>You will be redirected in a few seconds. If you can't wait <a href='https://att-weather-app.herokuapp.com/'>Click Here</a></h2>
     </body>
 </html>
