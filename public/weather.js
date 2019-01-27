@@ -1,3 +1,24 @@
+
+
+
+
+
+
+
+
+// for live use : https://att-weather-app.herokuapp.com/ 
+// for local dev use: http://localhost:3000/
+
+
+
+
+
+
+
+
+
+
+
 // Global variables to be shared between the functions, to avoid repetitive declarations
 var weatherBox;
 var weatherBoxWidth;
@@ -81,7 +102,7 @@ window.onload = window.onresize = function setUp() {
 };
 
 function initialQuery(){
-    var url = "http://localhost:5000/query?op=weather&location=sf,ca";
+    var url = "https://att-weather-app.herokuapp.com/query?op=weather&location=sf,ca";
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
@@ -446,7 +467,7 @@ function gotNewPlace() {
     // get what the user put into the textbox
     var newPlace = document.getElementById("userInput").value;
 
-    var url = `http://localhost:5000/query?op=weather&location=${newPlace}`;
+    var url = `https://att-weather-app.herokuapp.com/query?op=weather&location=${newPlace}`;
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
