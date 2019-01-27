@@ -81,7 +81,7 @@ window.onload = window.onresize = function setUp() {
 };
 
 function initialQuery(){
-    var url = "http://localhost:3000/query?op=weather&location=sf,ca";
+    var url = "http://localhost:5000/query?op=weather&location=sf,ca";
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
@@ -446,7 +446,7 @@ function gotNewPlace() {
     // get what the user put into the textbox
     var newPlace = document.getElementById("userInput").value;
 
-    var url = `http://localhost:3000/query?op=weather&location=${newPlace}`;
+    var url = `http://localhost:5000/query?op=weather&location=${newPlace}`;
 
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", reqListener);
